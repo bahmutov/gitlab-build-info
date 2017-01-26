@@ -8,15 +8,57 @@
 [![semantic-release][semantic-image] ][semantic-url]
 [![js-standard-style][standard-image]][standard-url]
 
+[GitLab CI](https://about.gitlab.com/gitlab-ci/) has a lot of environment
+variables, see [the list](https://docs.gitlab.com/ce/ci/variables/#predefined-variables-environment-variables).
+This module collects the relevant ones into a single object that can also
+generate nice text summary suitable for emails / logs
+
+## Install and use
+
+```
+npm i -D gitlab-build-info
+```
+
+While running on GitLab:
+
+```js
+const grabGitLabInfo = require('gitlab-build-info')
+const {collectionInformation} = grabGitLabInfo()
+const info = collectionInformation()
+// info {specName, buildUrl, ...}
+```
+
+You can get text summary from the `info` object
+
+```js
+const msg = info.toString()
+/*
+  returns a string with something like
+
+  ==============================
+   Build information (GitLab)
+  ==============================
+  Project name: my-test
+  Build spec name: test-spec
+  Build ID: 101
+  Build URL: https://server.com/user/test/builds/101
+  Pipeline ID: 550
+  Pipeline URL: https://server.com/user/test/pipelines/550
+  Project URL: https://server.com/user/test
+*/
+```
+
+## Details
+
+See [src/index.js](src/index.js) for the list of returned properties.
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2017
 
-
 * [@bahmutov](https://twitter.com/bahmutov)
 * [glebbahmutov.com](http://glebbahmutov.com)
 * [blog](http://glebbahmutov.com/blog)
-
 
 License: MIT - do anything with the code, but don't blame me if it does not work.
 
