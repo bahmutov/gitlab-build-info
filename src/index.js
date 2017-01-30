@@ -10,12 +10,12 @@ function init (env) {
 
   function collectionInformation (projectName) {
     la(is.maybe.string(projectName), 'expected project name', projectName)
-    la(isOnGitLab, 'cannot get information if not running on GitLab')
 
     const forced = Boolean(env.FORCE)
     if (forced) {
       console.log('skipping environment variable checks, because FORCE')
     } else {
+      la(isOnGitLab, 'cannot get information if not running on GitLab')
       la(is.url(env.CI_PROJECT_URL), 'invalid CI_PROJECT_URL', env)
       la(is.unemptyString(env.CI_BUILD_NAME), 'missing CI_BUILD_NAME', env)
     }
