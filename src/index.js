@@ -12,8 +12,13 @@ function init (env) {
     la(is.maybe.string(projectName), 'expected project name', projectName)
     la(isOnGitLab, 'cannot get information if not running on GitLab')
 
-    la(is.url(env.CI_PROJECT_URL), 'invalid CI_PROJECT_URL', env)
-    la(is.unemptyString(env.CI_BUILD_NAME), 'missing CI_BUILD_NAME', env)
+    const forced = Boolean(env.FORCE)
+    if (forced) {
+      console.log('skipping environment variable checks, because FORCE')
+    } else {
+      la(is.url(env.CI_PROJECT_URL), 'invalid CI_PROJECT_URL', env)
+      la(is.unemptyString(env.CI_BUILD_NAME), 'missing CI_BUILD_NAME', env)
+    }
 
     const buildUrl = `${env.CI_PROJECT_URL}/builds/${env.CI_BUILD_ID}`
     const info = {

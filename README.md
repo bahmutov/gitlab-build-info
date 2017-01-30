@@ -52,6 +52,10 @@ const msg = info.toString()
 
 See [src/index.js](src/index.js) for the list of returned properties.
 
+Usually this module checks if there are valid variables on GitLab CI.
+If you want to skip environment variable checks set environment variable
+`FORCE=1` and the module will return values even if undefined.
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2017
