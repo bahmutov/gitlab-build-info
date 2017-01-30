@@ -23,9 +23,11 @@ While running on GitLab:
 
 ```js
 const grabGitLabInfo = require('gitlab-build-info')
-const {collectionInformation} = grabGitLabInfo()
-const info = collectionInformation()
-// info {specName, buildUrl, ...}
+const {isOnGitLab, collectionInformation} = grabGitLabInfo()
+if (isOnGitLab) {
+  const info = collectionInformation()
+  // info {specName, buildUrl, ...}
+}
 ```
 
 You can get text summary from the `info` object
